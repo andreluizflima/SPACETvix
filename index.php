@@ -10,7 +10,8 @@
         $_SESSION['a'] = 'inicio';
     }
 
-    //inclui as funcoes necessárias do sistema
+    //inclui as funcoes necessárias do sistema 
+    include_once('inc/funcoes.php');
     include_once('inc/gestorBD.php');    
 
     include_once('_cabecalho.php');    
