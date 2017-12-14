@@ -25,12 +25,14 @@
         public static function IniciarSessao($dados){
             //iniciar a sessão
             $_SESSION['id_utilizador'] = $dados[0]['id_utilizador'];
+            $_SESSION['nome'] = $dados[0]['nome'];
         }
 
         // =======================================================
         public static function DestroiSessao(){
             //destroi as variáveis da sessão
             unset($_SESSION['id_utilizador']);
+            unset($_SESSION['nome']);
         }
     }
 

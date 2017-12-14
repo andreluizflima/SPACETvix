@@ -162,4 +162,23 @@
   background-color: black;
   color: white; }
 
+/* barra dos utilizadores */
+.barra_utilizadores {
+  margin: 0px;
+  padding: 20px;
+  text-align: right;
+  background-color: #202020;
+  color: #8fa9e2; }
+.barra_utilizadores a {
+  text-decoration: none;
+  color: #d4d4d4; }
+.barra_utilizadores a:hover {
+  color: white; }
+
+.barra_utilizador_inativo {
+  color: #505050; }
+
+.barra_utilizador_ativo {
+  color: white; }
+
 /*# sourceMappingURL=main.css.map */
