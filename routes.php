@@ -15,7 +15,16 @@
 
     // verificar o login
     if(!funcoes::VerificarLogin()){
-        $a='login';
+        
+        //caso especiais
+        $routes_especiais = [
+            'recuperar_password'
+        ];
+
+        //bypass do sistema normal
+        if(!in_array($a, $routes_especiais)){
+            $a='login';
+        }                        
     }
 
     // ========================================

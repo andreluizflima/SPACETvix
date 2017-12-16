@@ -12,6 +12,7 @@
 
     //inclui as funcoes necessárias do sistema 
     include_once('inc/funcoes.php');
+    include_once('inc/emails.php');
     include_once('inc/gestorBD.php');    
 
     //barra do utilizador
