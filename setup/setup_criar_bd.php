@@ -33,6 +33,7 @@
         'palavra_passe                  NVARCHAR(200), '.
         'nome                           NVARCHAR(50), '.
         'email                          NVARCHAR(50), '.
+        'permissoes                     NVARCHAR(100), '.
         'criado_em                      DATETIME, '.
         'atualizado_em                  DATETIME)'
     );
@@ -41,10 +42,10 @@
     // logs
     $gestor->EXE_NON_QUERY(
         'CREATE TABLE logs('.
-        'id_log                         BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, '.
+        'id_log                         INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, '.
         'data_hora                      DATETIME, '.
         'utilizador                     NVARCHAR(50), '.
-        'mensagem                       NVARCHAR(200)'
+        'mensagem                       NVARCHAR(200))'
     );
 ?>
 

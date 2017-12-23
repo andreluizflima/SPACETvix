@@ -39,6 +39,9 @@
             $erro = false;
             //inicia a sessão
             funcoes::IniciarSessao($dados);
+
+            //LOG
+            funcoes::CriarLOG('Utilizador '.$_SESSION['nome'].' fez login.', $_SESSION['nome']);
         }
     }
 ?>
@@ -87,5 +90,9 @@
 </div>   
 
 <?php endif; ?>
+
+<div class="text-center">
+    <a href="?a=setup" class="btn btn-secondary">Setup</a>
+</div>
 
 

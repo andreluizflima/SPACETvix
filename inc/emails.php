@@ -5,12 +5,19 @@ use PHPMailer\PHPMailer\Exception;
     class emails{
         
         // =========================================================
-        public function EnviarEmailRecuperacaoPW($nova_password){
+        public function EnviarEmail($dados){
+
+            // dados[0] = endereço de email do destinatário
+            // dados[1] = assunto
+            // dados[2] = mensagem
             require 'phpmailer/src/Exception.php';
             require 'phpmailer/src/PHPMailer.php';
             require 'phpmailer/src/SMTP.php';
+
+            //configurações
+            $configs = include('inc/config.php');
 		
-            $mail = new PHPMailer;
+            $mail = new PHPMailer();
             $mail->isSMTP();
             $mail->SMTPOptions = array(
                     'ssl' => array(
@@ -20,19 +27,20 @@ use PHPMailer\PHPMailer\Exception;
                     )
                 );
             $mail->isHTML();
-            $mail->SMTPDebug = 0;
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = 587;
+            $mail->SMTPDebug = $configs['MAIL_DEBUG'];
+            $mail->Host = $configs['MAIL_HOST'];
+            $mail->Port = $configs['MAIL_PORT'];
             $mail->SMTPAuth = true;
-            $mail->Username = 'spacetproject@gmail.com';
-            $mail->Password = 'space!123';
-            $mail->setFrom ('spacetproject@gmail.com', 'SPACET');
-            $mail->addAddress('spacetproject@gmail.com', 'Mensagem de teste');
+            $mail->Username = $configs['MAIL_USERNAME'];                        
+            //$mail->Username = 'fsdfdsf';                        
+            $mail->Password = $configs['MAIL_PASSWORD'];
+            $mail->setFrom ($configs['MAIL_FROM'], 'SPACET');
+            $mail->addAddress($dados[0], $dados[0]);
             $mail->CharSet = "UTF-8";
             //assunto
-            $mail->Subject = 'Mensagem de teste';
+            $mail->Subject = $dados[1];
             //mensagem
-            $mail->Body = 'Nova password: '.$nova_password;               
+            $mail->Body = $dados[2];               
             //envio da mensagem
             $enviada = false;
             if($mail->send()){ $enviada = true; }

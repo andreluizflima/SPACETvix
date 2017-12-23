@@ -11,6 +11,7 @@
 
     $erro = false;
     $mensagem = '';
+    $mensagem_enviada = false;
 
 
     // verificar se existe um POST
@@ -42,9 +43,15 @@
 
             //enviar o email
             $email = new emails();
-            $mensagem_enviada = $email->EnviarEmailRecuperacaoPW($nova_password);
+            //preparação dos dados do email
+            $temp = [
+                $dados[0]['email'],
+                'SPACET - Recuperação da password',
+                '<h3>SPACET</H3><h4>RECUPERAÇÃO DA PASSWORD</h4><p>'.$nova_password.'</p>'
+            ];
 
-
+            //envio do email
+            $mensagem_enviada = $email->EnviarEmail($temp);
 
             //alterar a senha na bd
             if($mensagem_enviada){
@@ -59,48 +66,64 @@
                     'UPDATE utilizadores
                     SET palavra_passe = :palavra_passe
                     WHERE id_utilizador = :id_utilizador', $parametros);
+
+                //LOG
+                funcoes::CriarLOG('O utilizador '.$dados[0]['nome'].' solicitou recuperação da password.', $dados[0]['nome']);
+
             } else {
-                echo 'Aconteceu um erro!';
+                //aconteceu um erro
+                $erro = true;
+                $mensagem = 'ATENÇÃO: O email de recuperação não foi enviado com sucesso. Tente novamente.';
             }
         }
     }
-
-
-
-
-
-    /*
-    - formulário que permite colocar um endereço de email
-    - submeter o formulário e procurar o endereço de email na tabela dos utilizadores
-    - se for encontrado um email, reformular a password e envia email para o usuário/utilizador
-    - informa qual é a nova password
-    */
-
 ?>
 
-<?php if($erro): ?>
-    <div class="alert alert-danger text-center">
-        <?php echo $mensagem ?>
+<?php if($mensagem_enviada == false) : ?>
+
+    <!-- apresentação de erro -->
+    <?php if($erro): ?>
+        <div class="alert alert-danger text-center">
+            <?php echo $mensagem ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- apresentação do formulário -->
+    <div class="container-fluid">    
+        <div class="row justify-content-center">
+            <div class="col-md-4 card m-3 p-3">
+            
+                <form action="?a=recuperar_password" method="post">                
+                    <div class="text-center">
+                    <h3>Recuperar Password</h3>
+                    <p>Coloque aqui o seu endereço de email para recuperação da password.</p>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="text_email" class="form-control" placeholder="email" required>
+                    </div>                
+                    <div class="form-group text-center">
+                        <a href="?a=inicio" class="btn btn-primary btn-size-150">Cancelar</a>
+                        <button role="submit" class="btn btn-primary btn-size-150">Recuperar</button>
+                    </div>
+                </form>            
+            </div>        
+        </div>
+    </div>
+
+<?php else :?>
+    <!-- apresentação da mensagem de sucesso na recuperação da password -->
+    <div class="container-fluid">    
+        <div class="row justify-content-center">
+            <div class="col-md-4 card m-3 p-3 text-center">
+            
+            <h2>RECUPERAÇÃO COM SUCESSO</h2>
+            <p>A recuperação da password foi efetuada com sucesso.<br>Consulte a sua caixa de entrada do email para conhecer a nova password.</p>
+
+            <div class="text-center">
+            <a href="?a=inicio" class="btn btn-primary btn-size-150">Voltar</a>
+            </div>
+
+            </div>                    
+        </div>
     </div>
 <?php endif; ?>
-
-<div class="container-fluid">    
-    <div class="row justify-content-center">
-        <div class="col-md-4 card m-3 p-3">
-           
-            <form action="?a=recuperar_password" method="post">                
-                <div class="text-center">
-                <h3>Recuperar Password</h3>
-                <p>Coloque aqui o seu endereço de email para recuperação da password.</p>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="text_email" class="form-control" placeholder="email" required>
-                </div>                
-                <div class="form-group text-center">
-                    <a href="?a=inicio" class="btn btn-primary btn-size-150">Cancelar</a>
-                    <button role="submit" class="btn btn-primary btn-size-150">Recuperar</button>
-                </div>
-            </form>            
-        </div>        
-    </div>
-</div>

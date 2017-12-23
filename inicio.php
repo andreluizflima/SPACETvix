@@ -11,7 +11,7 @@
 
 <div class="container-fluid pad-20">
 
-    <!-- butão para aceder ao setup -->
+    <!-- botão para aceder ao setup -->
     <div class="text-center">
         <a href="?a=setup" class="btn btn-secondary">Setup</a>
     </div>
