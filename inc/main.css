@@ -186,4 +186,15 @@
 .barra_utilizador_ativo {
   color: white; }
 
+.permissao-titulo {
+  font-weight: bold; }
+
+.permissao-sumario {
+  font-size: .8em;
+  font-style: italic;
+  opacity: .7; }
+
+.caixa-permissoes label {
+  margin: 0px !important; }
+
 /*# sourceMappingURL=main.css.map */

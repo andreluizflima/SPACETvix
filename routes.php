@@ -54,6 +54,8 @@
         // =====================================
         //opções do administrador
         case 'utilizadores_gerir':              include_once('admin/utilizadores_gerir.php'); break;
+        //formulário para adicionar novo utilizador
+        case 'utilizadores_adicionar':          include_once('admin/utilizadores_adicionar.php'); break;
 
 
 
