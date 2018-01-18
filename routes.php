@@ -56,6 +56,12 @@
         case 'utilizadores_gerir':              include_once('admin/utilizadores_gerir.php'); break;
         //formulário para adicionar novo utilizador
         case 'utilizadores_adicionar':          include_once('admin/utilizadores_adicionar.php'); break;
+        //editar utilizador
+        case 'editar_utilizador':               include_once('admin/utilizadores_editar.php'); break;
+        //editar permissões
+        case 'editar_permissoes':               include_once('admin/utilizadores_permissoes_editar.php'); break;
+        //eliminar utilizador
+        case 'eliminar_utilizador':             include_once('admin/utilizadores_eliminar.php'); break;
 
 
 
@@ -65,6 +71,12 @@
         case 'about':                           include_once('about.php'); break;
         //abre o menu do setup
         case 'setup':                           include_once('setup/setup.php'); break;
+
+
+
+
+
+
 
         // =====================================
         // SETUP
