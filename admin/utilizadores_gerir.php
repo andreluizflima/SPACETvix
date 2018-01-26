@@ -2,7 +2,6 @@
     // ========================================
     // gestão de utilizadores
     // ========================================
-
     // verificar a sessão
     if(!isset($_SESSION['a'])){
         exit();
